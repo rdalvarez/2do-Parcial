@@ -1,44 +1,40 @@
 <?php
-	require_once('clases/lib/nusoap.php');
+session_start();
+	require_once('clases/Usuario.php');
+	$obj = new stdClass();
+	$obj->Exito = TRUE;
+	$obj->Mensaje = "";
 
-    $usuario = isset($_POST['usuario']) ? json_decode(json_encode($_POST['usuario'])) : NULL;
+	//var_dump($_POST);
 
-    $obj = new stdClass();
-    $obj->Exito = FALSE;
-    $obj->Mensaje = "ERROR EN LOGIN";
+	$user = new stdClass();
+	$user->nombre = $_POST['usuario']['Nombre'];
+	$user->password = $_POST['usuario']['Password'];
+	$user->email = $_POST['usuario']['Email'];
 
-//IMPLEMENTAR...
 
-    $host = 'http://maxineiner.tuars.com/webservice/ws_segundo_parcial.php';
 
-    $client = new nusoap_client($host.'?wsdl');
+	$objDB = Usuario::TraerUsuarioLogueado($user);
 
-    $err = $client->getError();
-		if ($err) {
-			$obj->Mensaje='ERROR EN LA CONSTRUCCION DEL WS: ' . $err;
-			die();
-		}
-
-	$ObjUsuario = $client->call('LoginWS', array($usuario));
-
-	if ($client->fault) {
-			$obj->Mensaje='ERROR AL INVOCAR METODO: '. print_r($ObjUsuario);
-			//print_r($ObjUsuario);
-	} else {
-		$err = $client->getError();
-		if ($err) {
-			$obj->Mensaje='ERROR EN EL CLIENTE: '. $err;
-		}else
-		{
-			//var_dump($ObjUsuario); = array[0][id] [nombre] [email] [perfil]     SOLO ADMITE LOS 3 PRIMEROS PERFILES (OSEA ES SU BASE)
-			if (!empty($ObjUsuario)) {
-    			$obj->Exito = TRUE;
-	    		$obj->Mensaje = "PUDO LOGUEARSE EXITOSAMENTE";
-	    		session_start();
-				$_SESSION['Usuario'] = json_encode($ObjUsuario[0]);
-			}
-		}
+	if (!$objDB) {
+		$obj->Exito = FALSE;
+		$obj->Mensaje = "No se encontro el usuario";
+		echo json_encode($obj);	
+		return;
 	}
+/*	else{
+		if ($objDB->nombre == $user->nombre) {
+			$obj->Exito = FALSE;
+			$obj->Mensaje = "No se encontro el usuario";
+		}
+	}*/
 
+	$_SESSION['Usuario'] = json_encode($objDB);
+	$cookie_nombre = 'Usuario';
+    $cookie_valor = json_encode(json_decode($_SESSION['Usuario']));
 
-    echo json_encode($obj);
+    setcookie($cookie_nombre,$cookie_valor, time() + 30, "/");
+
+	echo json_encode($obj);
+
+?>

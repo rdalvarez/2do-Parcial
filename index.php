@@ -1,7 +1,7 @@
 <?php
-//require_once("verificar_sesion.php");
+
 require_once("verificar_sesion.php");
-//$user = $_SESSION["Usuario"];
+
 //var_dump($_SESSION);
 $user = $_SESSION["Usuario"]; //TRAIGO UN JSON
 ?>
@@ -29,15 +29,14 @@ $user = $_SESSION["Usuario"]; //TRAIGO UN JSON
                 //var_dump($objUser);
                 echo "<a class='btn btn-success animated bounceInLeft' href='#' onclick='Enunciado()'><span class='glyphicon glyphicon-home'>&nbsp;</span>Enunciado</a>";
 
-                if ($objUser->perfil!="invitado") {
+                if ($objUser->perfil=="vendedor") {
                     echo "<a class='btn btn-default animated bounceInLeft' href='#' onclick='MostrarGrilla()'><span class='glyphicon glyphicon-th'>&nbsp;</span>Grilla&nbsp;</a>";
                 }
                 
-                if ($objUser->perfil != "usuario" && $objUser->perfil!="invitado") {
-                    echo "<a class='btn btn-info animated bounceInLeft' href='#' onclick='CargarFormUsuario()'><span class='glyphicon glyphicon-user'>&nbsp;</span><span class='glyphicon glyphicon-plus-sign'></span>Agregar Usuario&nbsp;</a>";
+                if ($objUser->perfil != "comprador") {
+                    echo "<a class='btn btn-info animated bounceInLeft' href='#' onclick='CargarFormProducto()'><span class='glyphicon glyphicon-user'>&nbsp;</span><span class='glyphicon glyphicon-plus-sign'></span>Agregar Usuario&nbsp;</a>";
                 }
                 
-               // echo "<a class='btn btn-primary animated bounceInLeft' href='#' onclick='EditarUsuario(" . ($user) . ")'><span class='glyphicon glyphicon-user'></span>Editar Perfil&nbsp;</a>";
                 if ($objUser->perfil!="invitado") {
                     echo "<a class='btn btn-primary animated bounceInLeft' href='#' onclick='EditarUsuario(" . ($user) . ")'><span class='glyphicon glyphicon-user'></span>Editar Perfil&nbsp;</a>";
                 }
@@ -46,10 +45,10 @@ $user = $_SESSION["Usuario"]; //TRAIGO UN JSON
 
                 echo "<a class='btn btn-warning animated bounceInLeft' href='#' onclick='traerCdsConWS()'><span class='glyphicon glyphicon-cd'></span>Mostrar Cds&nbsp;</a>";
 
-                 echo "<a class='btn btn-default animated bounceInLeft' href='#' onclick='SetCookie()'><span class='glyphicon glyphicon-eye-open'>&nbsp;</span>Set Cookie&nbsp;</a>";
+                 //echo "<a class='btn btn-default animated bounceInLeft' href='#' onclick='SetCookie()'><span class='glyphicon glyphicon-eye-open'>&nbsp;</span>Set Cookie&nbsp;</a>";
 
                 ?>
-                <span id="spanDatos" class="animated bounceInRight" style='margin-top:-10px' ><h3><?php echo $objUser->nombre . " - " . $objUser->perfil;//echo $objUser->nombre . " - " . $objUser->perfil; ?>&nbsp;&nbsp;</h3></span>
+                <span id="spanDatos" class="animated bounceInRight" style='margin-top:-10px' ><h3><?php echo $objUser->nombre . " - " . $objUser->perfil;?>&nbsp;&nbsp;</h3></span>
             </div>
             <h1 style="font-size:28px">SEGUNDO PARCIAL</h1>
             <hr/>

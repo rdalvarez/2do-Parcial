@@ -6,6 +6,7 @@
         <!-- jQuery library -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
         <script type="text/javascript" src="./js/funciones_login.js"></script>
+        <script type="text/javascript" src="./js/funciones.js"></script>
 
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="css/estilo.css">
@@ -20,12 +21,17 @@
                 <h1>LOGIN</h1>
 
                 <form id="FormIngreso" method="post">
+
+                    <input type="text" id="nombre" placeholder="Nombre" value="" />
                     <input type="text" id="email" placeholder="E-mail" value="" />
                     <input type="password" id="password" placeholder="Password" value="" />
 
                     <input type="button" class="btn btn-danger" value="LOGIN" onclick="Login()" />
 
                 </form>
+
+                <input type="button" class="btn btn-danger" value="vendedor" onclick="usuarios(1)" />
+                <input type="button" class="btn btn-danger" value="comprador" onclick="usuarios(3)" />
             </div>
             <div style="text-align:center">
                 <?php

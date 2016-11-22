@@ -41,14 +41,14 @@ function MostrarGrilla() {
     $.ajax({
         type: 'POST',
         url: pagina,
-        dataType: "html",
+        dataType: "json",
         data: {
             queMuestro: "MOSTRAR_GRILLA"
         },
         async: true
     })
-    .done(function (html) {
-        $("#divGrilla").html(html);
+    .done(function (json) {
+        $("#divGrilla").html(json.html);
         //console.log(html);
     })
     .fail(function (jqXHR, textStatus, errorThrown) {
@@ -56,38 +56,34 @@ function MostrarGrilla() {
     });
 
 }
-function CargarFormUsuario() {
+function CargarFormProducto() {
 
     var pagina = "./administracion.php";
 
     $.ajax({
         type: 'POST',
         url: pagina,
-        dataType: "html",
+        dataType: "json",
         data: {
             queMuestro: "FORM"
         },
         async: true
     })
-    .done(function (html) {
-        //console.log(html);
-        $("#divAbm").html(html);
+    .then(function (json) {
+
+        console.log(json.html);
+        $("#divAbm").html(json.html);
         $('#cboPerfiles > option[value="usuario"]').attr('selected', 'selected');
-    })
-    .fail(function (jqXHR, textStatus, errorThrown) {
+    }
+    ,function (jqXHR, textStatus, errorThrown) {
         alert(jqXHR.responseText + "\n" + textStatus + "\n" + errorThrown);
     });
 
 }
-function AgregarUsuario() {
+function AgregarProducto() {
 
-    var id = $("#hdnIdUsuario").val();
     var nombre = $("#txtNombre").val();
-    var email = $("#txtEmail").val();
-    var password = $("#txtPassword").val();
-    var perfil = $("#cboPerfiles").val();
-    var foto = $("#hdnFotoSubir").val();
-
+    var porcentaje = $("#txtPorcentaje").val();
     //console.log(id+nombre+email+password+perfil);
 
 
@@ -98,13 +94,9 @@ function AgregarUsuario() {
         url: pagina,
         dataType: "json",
         data: {
-            queMuestro: "ALTA_USUARIO",
-            id: id,
+            queMuestro: "ALTA_PRODUCTO",
             nombre: nombre,
-            email: email,
-            password: password,
-            perfil: perfil,
-            foto: foto
+            porcentaje: porcentaje
         },
         async: true
     })
@@ -195,7 +187,7 @@ function ModificarUsuario() {//#3a
     });
 
 }
-function EliminarUsuario() {//#3b
+function Borrar(id) {//#3b
 
     if (!confirm("Eliminar USUARIO?")) {
         return;
@@ -203,21 +195,16 @@ function EliminarUsuario() {//#3b
 
     var pagina = "./administracion.php";
 
-    var id = $("#hdnIdUsuario").val();
-    var foto = $("#hdnFotoSubir").val();
-
-    //alert("DATOS:"+id+foto);
-
-    var usuario = {};
-    usuario.id = id;
+    var producto = {};
+    producto.id = id;
 
     $.ajax({
         type: 'POST',
         url: pagina,
         dataType: "json",
         data: {
-            queMuestro: "ELIMINAR_USUARIO",
-            usuario: usuario
+            queMuestro: "ELIMINAR_PRODUCTO",
+            producto: producto
         },
         async: true
     })
@@ -300,8 +287,6 @@ function SetCookie(){
         async: true
     })
     .done(function (respuesta) {
-        alert("Cookie Seteada");
-        location.reload();        
     })
     .fail(function (jqXHR, textStatus, errorThrown) {
         alert(jqXHR.responseText + "\n" + textStatus + "\n" + errorThrown);
