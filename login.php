@@ -30,8 +30,8 @@
 
                 </form>
 
-                <input type="button" class="btn btn-danger" value="vendedor" onclick="usuarios(1)" />
-                <input type="button" class="btn btn-danger" value="comprador" onclick="usuarios(3)" />
+                <input type="button" class="btn btn-danger" value="comprador" onclick="usuarios(1)" />
+                <input type="button" class="btn btn-danger" value="vendedor" onclick="usuarios(3)" />
             </div>
             <div style="text-align:center">
                 <?php

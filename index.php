@@ -27,9 +27,9 @@ $user = $_SESSION["Usuario"]; //TRAIGO UN JSON
                 //$objUser = json_decode($user);
                 $objUser = json_decode($user);
                 //var_dump($objUser);
-                echo "<a class='btn btn-success animated bounceInLeft' href='#' onclick='Enunciado()'><span class='glyphicon glyphicon-home'>&nbsp;</span>Enunciado</a>";
+                //echo "<a class='btn btn-success animated bounceInLeft' href='#' onclick='Enunciado()'><span class='glyphicon glyphicon-home'>&nbsp;</span>Enunciado</a>";
 
-                if ($objUser->perfil=="vendedor") {
+                if ($objUser->perfil!="vendedor") {
                     echo "<a class='btn btn-default animated bounceInLeft' href='#' onclick='MostrarGrilla()'><span class='glyphicon glyphicon-th'>&nbsp;</span>Grilla&nbsp;</a>";
                 }
                 
@@ -38,12 +38,12 @@ $user = $_SESSION["Usuario"]; //TRAIGO UN JSON
                 }
                 
                 if ($objUser->perfil!="invitado") {
-                    echo "<a class='btn btn-primary animated bounceInLeft' href='#' onclick='EditarUsuario(" . ($user) . ")'><span class='glyphicon glyphicon-user'></span>Editar Perfil&nbsp;</a>";
+                    echo "<a class='btn btn-primary animated bounceInLeft' href='#' onclick='FrmEditarUsuario(" . ($user) . ")'><span class='glyphicon glyphicon-user'></span>Editar Perfil&nbsp;</a>";
                 }
                
                 echo "<a class='btn btn-danger animated bounceInLeft' href='#' onclick='Logout()'><span class='glyphicon glyphicon-off'></span>LogOut&nbsp;</a>";
 
-                echo "<a class='btn btn-warning animated bounceInLeft' href='#' onclick='traerCdsConWS()'><span class='glyphicon glyphicon-cd'></span>Mostrar Cds&nbsp;</a>";
+               // echo "<a class='btn btn-warning animated bounceInLeft' href='#' onclick='traerCdsConWS()'><span class='glyphicon glyphicon-cd'></span>Mostrar Cds&nbsp;</a>";
 
                  //echo "<a class='btn btn-default animated bounceInLeft' href='#' onclick='SetCookie()'><span class='glyphicon glyphicon-eye-open'>&nbsp;</span>Set Cookie&nbsp;</a>";
 

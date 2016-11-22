@@ -116,23 +116,22 @@ function AgregarProducto() {
         alert(jqXHR.responseText + "\n" + textStatus + "\n" + errorThrown);
     });
 }
-function EditarUsuario(obj) {//#sin case
-
+function FrmEditarUsuario(obj) {//#sin case
     var pagina = "./administracion.php";
 
     $.ajax({
         type: 'POST',
         url: pagina,
-        dataType: "html",
+        dataType: "json",
         data: {
-            queMuestro: "FORM",
+            queMuestro: "FORM_MODIFICAR_USUARIO",
             usuario: obj
         },
         async: true
     })
-    .done(function (html) {
-        //console.log(html);
-        $("#divAbm").html(html);        
+    .done(function (json) {
+        //console.log(json);
+        $("#divAbm").html(json.html);        
     })
     .fail(function (jqXHR, textStatus, errorThrown) {
         alert(jqXHR.responseText + "\n" + textStatus + "\n" + errorThrown);
